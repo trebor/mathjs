@@ -31235,7 +31235,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {AccessorNode}
 	   */
 	  AccessorNode.prototype.clone = function () {
-	    return Node.prototype.clone(new AccessorNode(this.object, this.index));
+	    return this.copyCustom(new AccessorNode(this.object, this.index));
 	  };
 
 	  /**
@@ -31508,11 +31508,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Create a clone of this node, a shallow copy
 	   * @return {Node}
 	   */
-	  Node.prototype.clone = function (newClone) {
+	  Node.prototype.clone = function () {
+	    // must be implemented by each of the Node implementations
+	    throw new Error('Cannot clone a Node interface');
+	  };
+
+	  /**
+	   * Copy over custom field if it exists in original.
+	   */
+
+	  Node.prototype.copyCustom = function (destination) {
 	    if (this.custom) {
-	      newClone.custom = this.custom;
+	      destination.custom = this.custom;
 	    }
-	    return newClone;
+	    return destination;
 	  };
 
 	  /**
@@ -32071,7 +32080,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {ArrayNode}
 	   */
 	  ArrayNode.prototype.clone = function() {
-	    return Node.prototype.clone(new ArrayNode(this.items.slice(0)));
+	    return this.copyCustom(new ArrayNode(this.items.slice(0)));
 	  };
 
 	  /**
@@ -32329,7 +32338,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {AssignmentNode}
 	   */
 	  AssignmentNode.prototype.clone = function() {
-	    return Node.prototype.clone(new AssignmentNode(this.object, this.index, this.value));
+	    return this.copyCustom(new AssignmentNode(this.object, this.index, this.value));
 	  };
 
 	  /*
@@ -32886,7 +32895,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      };
 	    });
 
-	    return Node.prototype.clone(new BlockNode(blocks));
+	    return this.copyCustom(new BlockNode(blocks));
 	  };
 
 	  /**
@@ -33043,7 +33052,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {ConditionalNode}
 	   */
 	  ConditionalNode.prototype.clone = function () {
-	    return Node.prototype.clone(new ConditionalNode(this.condition, this.trueExpr, this.falseExpr));
+	    return this.copyCustom(new ConditionalNode(this.condition, this.trueExpr, this.falseExpr));
 	  };
 
 	  /**
@@ -33260,7 +33269,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {ConstantNode}
 	   */
 	  ConstantNode.prototype.clone = function () {
-	    return Node.prototype.clone(new ConstantNode(this.value, this.valueType));
+	    return this.copyCustom(new ConstantNode(this.value, this.valueType));
 	  };
 
 	  /**
@@ -33428,7 +33437,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {FunctionAssignmentNode}
 	   */
 	  FunctionAssignmentNode.prototype.clone = function () {
-	    return Node.prototype.clone(new FunctionAssignmentNode(this.name, this.params.slice(0), this.expr));
+	    return this.copyCustom(new FunctionAssignmentNode(this.name, this.params.slice(0), this.expr));
 	  };
 
 	  /**
@@ -33651,7 +33660,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {IndexNode}
 	   */
 	  IndexNode.prototype.clone = function () {
-	    return Node.prototype.clone(new IndexNode(this.dimensions.slice(0)));
+	    return this.copyCustom(new IndexNode(this.dimensions.slice(0)));
 	  };
 
 	  /**
@@ -33832,7 +33841,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {RangeNode}
 	   */
 	  RangeNode.prototype.clone = function () {
-	    return Node.prototype.clone(new RangeNode(this.start, this.end, this.step && this.step));
+	    return this.copyCustom(new RangeNode(this.start, this.end, this.step && this.step));
 	  };
 
 	  /**
@@ -34040,7 +34049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {SymbolNode}
 	   */
 	  SymbolNode.prototype.clone = function() {
-	    return Node.prototype.clone(new SymbolNode(this.name));
+	    return this.copyCustom(new SymbolNode(this.name));
 	  };
 
 	  /**
@@ -34183,7 +34192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        properties[key] = this.properties[key];
 	      }
 	    }
-	    return Node.prototype.clone(new ObjectNode(properties));
+	    return this.copyCustom(new ObjectNode(properties));
 	  };
 
 	  /**
@@ -34332,7 +34341,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {OperatorNode}
 	   */
 	  OperatorNode.prototype.clone = function () {
-	    return Node.prototype.clone(new OperatorNode(this.op, this.fn, this.args.slice(0)));
+	    return this.copyCustom(new OperatorNode(this.op, this.fn, this.args.slice(0)));
 	  };
 
 	  /**
@@ -34838,7 +34847,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {FunctionNode}
 	   */
 	  FunctionNode.prototype.clone = function () {
-	    return Node.prototype.clone(new FunctionNode(this.fn, this.args.slice(0)));
+	    return this.copyCustom(new FunctionNode(this.fn, this.args.slice(0)));
 	  };
 
 	  //backup Node's toString function
@@ -35134,7 +35143,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {ParenthesisNode}
 	   */
 	  ParenthesisNode.prototype.clone = function() {
-	    return Node.prototype.clone(new ParenthesisNode(this.content));
+	    return this.copyCustom(new ParenthesisNode(this.content));
 	  };
 
 	  /**
