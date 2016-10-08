@@ -31510,7 +31510,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  Node.prototype.clone = function (newClone) {
 	    if (this.custom) {
-	      newClone.custom = custom;
+	      newClone.custom = this.custom;
 	    }
 	    return newClone;
 	  };

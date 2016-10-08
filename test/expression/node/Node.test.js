@@ -63,7 +63,7 @@ describe('Node', function() {
     assert.deepEqual(c, b);
   });
 
-  it.only ('should copy custom field in clone', function () {
+  it ('should copy custom field in clone', function () {
     var a = new Node();
     a.custom = 'frog';
     var b = a.clone(a);
