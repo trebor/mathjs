@@ -14,7 +14,7 @@ describe('kldivergence', function(){
     it('should return distance between two distrubutions', function(){
         var q = [0.5,0.6,0.7];
         var p = [0.4,0.5,0.6];
-        assert.equal(math.kldivergence(q, p), 0.00038410187968898266);
+        assert.equal(math.kldivergence(q, p), 0.0003841018796889844);
 
         var q2 = [0.9,0.2,0.8,0.4];
         var p2 = [0.1,0.8,0.7,0.6];
