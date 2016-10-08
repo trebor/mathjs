@@ -31224,10 +31224,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @returns {AccessorNode} Returns a transformed copy of the node
 	   */
 	  AccessorNode.prototype.map = function (callback) {
-	    return new AccessorNode(
+	    return this.copyCustom(new AccessorNode(
 	        this._ifNode(callback(this.object, 'object', this)),
 	        this._ifNode(callback(this.index, 'index', this))
-	    );
+	    ));
 	  };
 
 	  /**
@@ -32072,7 +32072,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    for (var i = 0; i < this.items.length; i++) {
 	      items[i] = this._ifNode(callback(this.items[i], 'items[' + i + ']', this));
 	    }
-	    return new ArrayNode(items);
+	    return this.copyCustom(new ArrayNode(items));
 	  };
 
 	  /**
@@ -32330,7 +32330,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        : null;
 	    var value = this._ifNode(callback(this.value, 'value', this));
 
-	    return new AssignmentNode(object, index, value);
+	    return this.copyCustom(new AssignmentNode(object, index, value));
 	  };
 
 	  /**
@@ -32880,7 +32880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        visible: block.visible
 	      };
 	    }
-	    return new BlockNode(blocks);
+	    return this.copyCustom(new BlockNode(blocks));
 	  };
 
 	  /**
@@ -33040,11 +33040,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @returns {ConditionalNode} Returns a transformed copy of the node
 	   */
 	  ConditionalNode.prototype.map = function (callback) {
-	    return new ConditionalNode(
+	    return this.copyCustom(new ConditionalNode(
 	        this._ifNode(callback(this.condition, 'condition', this)),
 	        this._ifNode(callback(this.trueExpr, 'trueExpr', this)),
 	        this._ifNode(callback(this.falseExpr, 'falseExpr', this))
-	    );
+	    ));
 	  };
 
 	  /**
@@ -33429,7 +33429,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  FunctionAssignmentNode.prototype.map = function (callback) {
 	    var expr = this._ifNode(callback(this.expr, 'expr', this));
 
-	    return new FunctionAssignmentNode(this.name, this.params.slice(0), expr);
+	    return this.copyCustom(new FunctionAssignmentNode(this.name, this.params.slice(0), expr));
 	  };
 
 	  /**
@@ -33652,7 +33652,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      dimensions[i] = this._ifNode(callback(this.dimensions[i], 'dimensions[' + i + ']', this));
 	    }
 
-	    return new IndexNode(dimensions);
+	    return this.copyCustom(new IndexNode(dimensions));
 	  };
 
 	  /**
@@ -33829,11 +33829,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @returns {RangeNode} Returns a transformed copy of the node
 	   */
 	  RangeNode.prototype.map = function (callback) {
-	    return new RangeNode(
+	    return this.copyCustom(new RangeNode(
 	        this._ifNode(callback(this.start, 'start', this)),
 	        this._ifNode(callback(this.end, 'end', this)),
 	        this.step && this._ifNode(callback(this.step, 'step', this))
-	    );
+	    ));
 	  };
 
 	  /**
@@ -34178,7 +34178,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        properties[key] = this._ifNode(callback(this.properties[key], 'properties["' + key + '"]', this));
 	      }
 	    }
-	    return new ObjectNode(properties);
+	    return this.copyCustom(new ObjectNode(properties));
 	  };
 
 	  /**
@@ -34333,7 +34333,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    for (var i = 0; i < this.args.length; i++) {
 	      args[i] = this._ifNode(callback(this.args[i], 'args[' + i + ']', this));
 	    }
-	    return new OperatorNode(this.op, this.fn, args);
+	    return this.copyCustom(new OperatorNode(this.op, this.fn, args));
 	  };
 
 	  /**
@@ -34839,7 +34839,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    for (var i = 0; i < this.args.length; i++) {
 	      args[i] = this._ifNode(callback(this.args[i], 'args[' + i + ']', this));
 	    }
-	    return new FunctionNode(fn, args);
+	    return this.copyCustom(new FunctionNode(fn, args));
 	  };
 
 	  /**
@@ -35135,7 +35135,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  ParenthesisNode.prototype.map = function (callback) {
 	    var content = callback(this.content, 'content', this);
-	    return new ParenthesisNode(content);
+	    return this.copyCustom(new ParenthesisNode(content));
 	  };
 
 	  /**
