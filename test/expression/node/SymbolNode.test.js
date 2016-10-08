@@ -93,8 +93,8 @@ describe('SymbolNode', function() {
 
   it ('should clone a SymbolNode', function () {
     var a = new SymbolNode('x');
+    a.custom = 'frog';
     var b = a.clone();
-
     assert(b instanceof SymbolNode);
     assert.deepEqual(a, b);
     assert.notStrictEqual(a, b);

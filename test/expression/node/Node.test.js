@@ -63,11 +63,11 @@ describe('Node', function() {
     assert.deepEqual(c, b);
   });
 
-  it ('should copy custom field in clone', function () {
-    var a = new Node();
-    a.custom = 'frog';
-    var b = a.clone(a);
-    assert.equal(a.custom, b.custom);
+  it ('should throw an error when cloning a Node interface', function () {
+    assert.throws(function () {
+      var a = new Node();
+      a.clone();
+    }, /Cannot clone a Node interface/);
   });
 
   it ('should throw an error when stringifying a Node interface', function () {
